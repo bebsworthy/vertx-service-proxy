@@ -208,19 +208,19 @@ public class TestServiceVertxProxyHandler extends ProxyHandler {
           break;
         }
         case "dataObjectType": {
-          service.dataObjectType(json.getJsonObject("options") == null ? null : new io.vertx.serviceproxy.testmodel.TestDataObject(json.getJsonObject("options")));
+          service.dataObjectType(json.getJsonObject("options") == null ? null : io.vertx.serviceproxy.testmodel.TestDataObject.fromJson(json.getJsonObject("options")));
           break;
         }
         case "dataObjectTypeNull": {
-          service.dataObjectTypeNull(json.getJsonObject("options") == null ? null : new io.vertx.serviceproxy.testmodel.TestDataObject(json.getJsonObject("options")));
+          service.dataObjectTypeNull(json.getJsonObject("options") == null ? null : io.vertx.serviceproxy.testmodel.TestDataObject.fromJson(json.getJsonObject("options")));
           break;
         }
         case "listParams": {
-          service.listParams(convertList(json.getJsonArray("listString").getList()), json.getJsonArray("listByte").stream().map(o -> ((Number)o).byteValue()).collect(Collectors.toList()), json.getJsonArray("listShort").stream().map(o -> ((Number)o).shortValue()).collect(Collectors.toList()), json.getJsonArray("listInt").stream().map(o -> ((Number)o).intValue()).collect(Collectors.toList()), json.getJsonArray("listLong").stream().map(o -> ((Number)o).longValue()).collect(Collectors.toList()), convertList(json.getJsonArray("listJsonObject").getList()), convertList(json.getJsonArray("listJsonArray").getList()), json.getJsonArray("listDataObject").stream().map(o -> new TestDataObject((JsonObject)o)).collect(Collectors.toList()));
+          service.listParams(convertList(json.getJsonArray("listString").getList()), json.getJsonArray("listByte").stream().map(o -> ((Number)o).byteValue()).collect(Collectors.toList()), json.getJsonArray("listShort").stream().map(o -> ((Number)o).shortValue()).collect(Collectors.toList()), json.getJsonArray("listInt").stream().map(o -> ((Number)o).intValue()).collect(Collectors.toList()), json.getJsonArray("listLong").stream().map(o -> ((Number)o).longValue()).collect(Collectors.toList()), convertList(json.getJsonArray("listJsonObject").getList()), convertList(json.getJsonArray("listJsonArray").getList()), json.getJsonArray("listDataObject").stream().map(o -> TestDataObject.fromJson((JsonObject)o)).collect(Collectors.toList()));
           break;
         }
         case "setParams": {
-          service.setParams(convertSet(json.getJsonArray("setString").getList()), json.getJsonArray("setByte").stream().map(o -> ((Number)o).byteValue()).collect(Collectors.toSet()), json.getJsonArray("setShort").stream().map(o -> ((Number)o).shortValue()).collect(Collectors.toSet()), json.getJsonArray("setInt").stream().map(o -> ((Number)o).intValue()).collect(Collectors.toSet()), json.getJsonArray("setLong").stream().map(o -> ((Number)o).longValue()).collect(Collectors.toSet()), convertSet(json.getJsonArray("setJsonObject").getList()), convertSet(json.getJsonArray("setJsonArray").getList()), json.getJsonArray("setDataObject").stream().map(o -> new TestDataObject((JsonObject)o)).collect(Collectors.toSet()));
+          service.setParams(convertSet(json.getJsonArray("setString").getList()), json.getJsonArray("setByte").stream().map(o -> ((Number)o).byteValue()).collect(Collectors.toSet()), json.getJsonArray("setShort").stream().map(o -> ((Number)o).shortValue()).collect(Collectors.toSet()), json.getJsonArray("setInt").stream().map(o -> ((Number)o).intValue()).collect(Collectors.toSet()), json.getJsonArray("setLong").stream().map(o -> ((Number)o).longValue()).collect(Collectors.toSet()), convertSet(json.getJsonArray("setJsonObject").getList()), convertSet(json.getJsonArray("setJsonArray").getList()), json.getJsonArray("setDataObject").stream().map(o -> TestDataObject.fromJson((JsonObject)o)).collect(Collectors.toSet()));
           break;
         }
         case "mapParams": {

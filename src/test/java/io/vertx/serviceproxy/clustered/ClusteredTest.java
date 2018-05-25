@@ -156,8 +156,8 @@ public class ClusteredTest {
     Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> result.get() != null);
     List<JsonObject> out = result.get();
 
-    TestDataObject out0 = new TestDataObject(out.get(0));
-    TestDataObject out1 = new TestDataObject(out.get(1));
+    TestDataObject out0 = TestDataObject.fromJson(out.get(0));
+    TestDataObject out1 = TestDataObject.fromJson(out.get(1));
     assertThat(out0.getNumber()).isEqualTo(25);
     assertThat(out0.isBool()).isTrue();
     assertThat(out0.getString()).isEqualTo("vert.x");
@@ -172,7 +172,7 @@ public class ClusteredTest {
     Service service = Service.createProxy(consumerNode.get(), "my.service");
     TestDataObject data = new TestDataObject().setBool(true).setNumber(25).setString("vert.x");
     service.methodWithJsonObject(data.toJson(), ar -> {
-      result.set(new TestDataObject(ar.result()));
+      result.set(TestDataObject.fromJson(ar.result()));
     });
 
     Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> result.get() != null);
@@ -195,7 +195,7 @@ public class ClusteredTest {
     });
 
     Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> result.get() != null);
-    TestDataObject out = new TestDataObject(result.get().getJsonObject(1));
+    TestDataObject out = TestDataObject.fromJson(result.get().getJsonObject(1));
     assertThat(array.getString(0)).isEqualToIgnoringCase("vert.x");
     assertThat(out.getNumber()).isEqualTo(25);
     assertThat(out.isBool()).isTrue();

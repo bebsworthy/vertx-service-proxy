@@ -39,11 +39,16 @@ public class TestDataObject {
   public TestDataObject() {
   }
 
+  public TestDataObject(JsonObject obj) {
+    throw new Error("Some shithead is still using the constructor");
+  } /* fucking required */
 
-  public TestDataObject(JsonObject json) {
-    this.number = json.getInteger("number");
-    this.string = json.getString("string");
-    this.bool = json.getBoolean("bool");
+  public static TestDataObject fromJson(JsonObject json) {
+    TestDataObject t = new TestDataObject();
+    t.number = json.getInteger("number");
+    t.string = json.getString("string");
+    t.bool = json.getBoolean("bool");
+    return t;
   }
 
   public JsonObject toJson() {

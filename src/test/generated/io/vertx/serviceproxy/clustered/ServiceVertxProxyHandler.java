@@ -151,7 +151,7 @@ public class ServiceVertxProxyHandler extends ProxyHandler {
           break;
         }
         case "methodWithDataObject": {
-          service.methodWithDataObject(json.getJsonObject("data") == null ? null : new io.vertx.serviceproxy.testmodel.TestDataObject(json.getJsonObject("data")), res -> {
+          service.methodWithDataObject(json.getJsonObject("data") == null ? null : io.vertx.serviceproxy.testmodel.TestDataObject.fromJson(json.getJsonObject("data")), res -> {
             if (res.failed()) {
               if (res.cause() instanceof ServiceException) {
                 msg.reply(res.cause());
@@ -165,7 +165,7 @@ public class ServiceVertxProxyHandler extends ProxyHandler {
           break;
         }
         case "methodWithListOfDataObject": {
-          service.methodWithListOfDataObject(json.getJsonArray("list").stream().map(o -> new TestDataObject((JsonObject)o)).collect(Collectors.toList()), res -> {
+          service.methodWithListOfDataObject(json.getJsonArray("list").stream().map(o -> TestDataObject.fromJson((JsonObject)o)).collect(Collectors.toList()), res -> {
             if (res.failed()) {
               if (res.cause() instanceof ServiceException) {
                 msg.reply(res.cause());

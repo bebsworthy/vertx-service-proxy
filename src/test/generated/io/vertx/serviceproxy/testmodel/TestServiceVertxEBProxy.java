@@ -793,7 +793,7 @@ public class TestServiceVertxEBProxy implements TestService {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new TestDataObject(res.result().body())));
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : TestDataObject.fromJson(res.result().body())));
                       }
     });
   }
@@ -811,7 +811,7 @@ public class TestServiceVertxEBProxy implements TestService {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
       } else {
-        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : new TestDataObject(res.result().body())));
+        resultHandler.handle(Future.succeededFuture(res.result().body() == null ? null : TestDataObject.fromJson(res.result().body())));
                       }
     });
   }
@@ -1120,7 +1120,7 @@ public class TestServiceVertxEBProxy implements TestService {
       } else {
         resultHandler.handle(Future.succeededFuture(res.result().body().stream()
             .map(o -> { if (o == null) return null;
-                        return o instanceof Map ? new TestDataObject(new JsonObject((Map) o)) : new TestDataObject((JsonObject) o);
+                        return o instanceof Map ? TestDataObject.fromJson(new JsonObject((Map) o)) : TestDataObject.fromJson((JsonObject) o);
                  })
             .collect(Collectors.toList())));
       }
@@ -1340,7 +1340,7 @@ public class TestServiceVertxEBProxy implements TestService {
       } else {
         resultHandler.handle(Future.succeededFuture(res.result().body().stream()
             .map(o -> { if (o == null) return null;
-                        return o instanceof Map ? new TestDataObject(new JsonObject((Map) o)) : new TestDataObject((JsonObject) o);
+                        return o instanceof Map ? TestDataObject.fromJson(new JsonObject((Map) o)) : TestDataObject.fromJson((JsonObject) o);
                 })
             .collect(Collectors.toSet())));
       }
@@ -1381,7 +1381,7 @@ public class TestServiceVertxEBProxy implements TestService {
       } else {
         resultHandler.handle(Future.succeededFuture(res.result().body().stream()
             .map(o -> { if (o == null) return null;
-                        return o instanceof Map ? new TestDataObject(new JsonObject((Map) o)) : new TestDataObject((JsonObject) o);
+                        return o instanceof Map ? TestDataObject.fromJson(new JsonObject((Map) o)) : TestDataObject.fromJson((JsonObject) o);
                  })
             .collect(Collectors.toList())));
       }
@@ -1403,7 +1403,7 @@ public class TestServiceVertxEBProxy implements TestService {
       } else {
         resultHandler.handle(Future.succeededFuture(res.result().body().stream()
             .map(o -> { if (o == null) return null;
-                        return o instanceof Map ? new TestDataObject(new JsonObject((Map) o)) : new TestDataObject((JsonObject) o);
+                        return o instanceof Map ? TestDataObject.fromJson(new JsonObject((Map) o)) : TestDataObject.fromJson((JsonObject) o);
                 })
             .collect(Collectors.toSet())));
       }

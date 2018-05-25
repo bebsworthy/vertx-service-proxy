@@ -221,7 +221,7 @@ public class ServiceVertxEBProxy implements Service {
       if (res.failed()) {
         result.handle(Future.failedFuture(res.cause()));
       } else {
-        result.handle(Future.succeededFuture(res.result().body() == null ? null : new TestDataObject(res.result().body())));
+        result.handle(Future.succeededFuture(res.result().body() == null ? null : TestDataObject.fromJson(res.result().body())));
                       }
     });
     return this;
@@ -243,7 +243,7 @@ public class ServiceVertxEBProxy implements Service {
       } else {
         result.handle(Future.succeededFuture(res.result().body().stream()
             .map(o -> { if (o == null) return null;
-                        return o instanceof Map ? new TestDataObject(new JsonObject((Map) o)) : new TestDataObject((JsonObject) o);
+                        return o instanceof Map ? TestDataObject.fromJson(new JsonObject((Map) o)) : TestDataObject.fromJson((JsonObject) o);
                  })
             .collect(Collectors.toList())));
       }

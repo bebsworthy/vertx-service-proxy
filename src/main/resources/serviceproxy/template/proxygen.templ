@@ -79,7 +79,7 @@ send(_address, _json, _deliveryOptions, res -> {\n
 					@else{resultType.args[0].kind == CLASS_DATA_OBJECT}
         @{lastParam.name}.handle(Future.succeededFuture(res.result().body().stream()\n
             .map(o -> { if (o == null) return null;\n
-                        return o instanceof Map ? new @{resultType.args[0].simpleName}(new JsonObject((Map) o)) : new @{resultType.args[0].simpleName}((JsonObject) o);\n
+                        return o instanceof Map ? @{resultType.args[0].simpleName}.fromJson(new JsonObject((Map) o)) : @{resultType.args[0].simpleName}.fromJson((JsonObject) o);\n
                  })\n
             .collect(Collectors.toList())));\n
 					@else{}
@@ -91,7 +91,7 @@ send(_address, _json, _deliveryOptions, res -> {\n
 					@else{resultType.args[0].kind == CLASS_DATA_OBJECT}
         @{lastParam.name}.handle(Future.succeededFuture(res.result().body().stream()\n
             .map(o -> { if (o == null) return null;\n
-                        return o instanceof Map ? new @{resultType.args[0].simpleName}(new JsonObject((Map) o)) : new @{resultType.args[0].simpleName}((JsonObject) o);\n
+                        return o instanceof Map ? @{resultType.args[0].simpleName}.fromJson(new JsonObject((Map) o)) : @{resultType.args[0].simpleName}.fromJson((JsonObject) o);\n
                 })\n
             .collect(Collectors.toSet())));\n
 					@else{}
@@ -101,7 +101,7 @@ send(_address, _json, _deliveryOptions, res -> {\n
         String addr = res.result().headers().get("proxyaddr");\n
         @{lastParam.name}.handle(Future.succeededFuture(ProxyHelper.createProxy(@{resultType.simpleName}.class, _vertx, addr)));\n
 				@else{resultKind == CLASS_DATA_OBJECT}
-        @{lastParam.name}.handle(Future.succeededFuture(res.result().body() == null ? null : new @{resultType.simpleName}(res.result().body())));\n
+        @{lastParam.name}.handle(Future.succeededFuture(res.result().body() == null ? null : @{resultType.simpleName}.fromJson(res.result().body())));\n
                 @else{resultKind == CLASS_ENUM}
         @{lastParam.name}.handle(Future.succeededFuture(res.result().body() == null ? null : @{resultType.simpleName}.valueOf(res.result().body())));\n
 				@else{}

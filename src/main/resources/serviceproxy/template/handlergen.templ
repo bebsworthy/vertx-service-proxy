@@ -161,7 +161,7 @@ json.getString("@{param.name}") == null ? null : @{param.type.name}.valueOf(json
 				@else{param.type.kind == CLASS_LIST || param.type.kind == CLASS_SET}
 					@code{collection=param.type.kind == CLASS_LIST ? 'List' : 'Set'}
 					@if{param.type.args[0].kind == CLASS_DATA_OBJECT}
-json.getJsonArray("@{param.name}").stream().map(o -> new @{param.type.args[0].simpleName}((JsonObject)o)).collect(Collectors.to@{collection}())
+json.getJsonArray("@{param.name}").stream().map(o -> @{param.type.args[0].simpleName}.fromJson((JsonObject)o)).collect(Collectors.to@{collection}())
 					@else{param.type.args[0].name == 'java.lang.Byte' || param.type.args[0].name == 'java.lang.Short' || param.type.args[0].name == 'java.lang.Integer' || param.type.args[0].name == 'java.lang.Long'}
 					@code{abc=param.type.args[0].name}
 json.getJsonArray("@{param.name}").stream().map(o -> ((Number)o).@{numericMapping[abc]}Value()).collect(Collectors.to@{collection}())
@@ -176,7 +176,7 @@ json.getJsonObject("@{param.name}").getMap().entrySet().stream().collect(Collect
 convertMap(json.getJsonObject("@{param.name}").getMap())
 					@end{}
 				@else{param.type.kind == CLASS_DATA_OBJECT}
-json.getJsonObject("@{param.name}") == null ? null : new @{param.type.name}(json.getJsonObject("@{param.name}"))
+json.getJsonObject("@{param.name}") == null ? null : @{param.type.name}.fromJson(json.getJsonObject("@{param.name}"))
 				@else{}
 (@{param.type.name})json.getValue("@{param.name}")
 				@end{}
